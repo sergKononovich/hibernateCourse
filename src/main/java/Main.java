@@ -1,15 +1,17 @@
+import entities.Gender;
 import entities.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Date;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        Person person1 = new Person(1,"Anton");
-        Person person2 = new Person(2,"Sergey");
+        Person person1 = new Person("Anton", Gender.MALE, new Date());
+        Person person2 = new Person("Eve", Gender.FEMALE, new Date());
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
@@ -27,7 +29,7 @@ public class Main {
         List result = session.createQuery("from Person").list();
 
         for (Person person : (List<Person>)result) {
-            System.out.println(person.getFirstName());
+            System.out.println(person.toString());
         }
         session.getTransaction().commit();
         session.close();
