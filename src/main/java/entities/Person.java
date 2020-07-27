@@ -25,15 +25,19 @@ public class Person {
 
     private Date timestamp;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
     public Person() {
     }
 
-    public Person(String firstName, Gender gender, Date date) {
+    public Person(String firstName, Gender gender, Date date, Address address) {
         this.firstName = firstName;
         this.gender = gender;
         this.date = date;
         this.time = date;
         this.timestamp = date;
+        this.address = address;
     }
 
     public Person(int id, String firstName, Gender gender) {
@@ -92,12 +96,21 @@ public class Person {
         this.timestamp = timestamp;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", gender=" + gender +
+                ", adress=" + address.toString() +
                 ", date=" + date +
                 ", time=" + time +
                 ", timestamp=" + timestamp +

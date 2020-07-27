@@ -1,3 +1,4 @@
+import entities.Address;
 import entities.Gender;
 import entities.Person;
 import org.hibernate.Session;
@@ -10,8 +11,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Person person1 = new Person("Anton", Gender.MALE, new Date());
-        Person person2 = new Person("Eve", Gender.FEMALE, new Date());
+        Address address = new Address("Lenina");
+
+        Person person1 = new Person("Anton", Gender.MALE, new Date(), address);
+        Person person2 = new Person("Eve", Gender.FEMALE, new Date(), address);
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
@@ -19,6 +22,7 @@ public class Main {
 
         //пишем данные в бд
         session.beginTransaction();
+        session.persist(address);
         session.save(person1);
         session.save(person2);
         session.getTransaction().commit();
